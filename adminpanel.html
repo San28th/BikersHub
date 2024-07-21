@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AdminPanel</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link href="templates/css/adminpanel.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="navedit">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"
+            ><img src="templates/assets/logo.png" width="230px" height="80px"
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-center"
+            id="navbarNavDropdown"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/get_home"
+                  ><b><span>Home</span></b></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:5500/2index.html"
+                  ><b>Products</b></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><b>About Us</b></a>
+              </li>
+                            <li class="nav-item">
+                <a class="nav-link" href="/get_contact"><b>Contact Us</b></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <a href="#" class="btn addbtn" data-bs-toggle="modal" data-bs-target="#Mod"
+      ><span>Add Parts</span></a
+    >
+    <div class="adtable">
+      <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Sno</th>
+            <th scope="col">ProductName</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Price</th>
+            <th scope="col">Stock Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for i in order %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{i.product_name}}</td>
+            <td>{{i.brand}}</td>
+            <td>{{i.price}}</td>
+            <td>{{i.stock_status}}</td>
+            <td>
+              <button
+                class="btn1"
+                onclick="view1({{i.id}})"
+              >
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="50"
+                    height="20"
+                    fill="currentColor"
+                    class="bi bi-eye"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"
+                    />
+                    <path
+                      d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <button
+                class="btn1"
+                onclick="edit1({{i.id}})"
+              >
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="20"
+                    fill="currentColor"
+                    class="bi bi-pencil-square"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <button class="btn1" onclick="get_delete({{i.id}})">
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="50"
+                    height="20"
+                    fill="currentColor"
+                    class="bi bi-trash"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"
+                    />
+                    <path
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+    <div class="adtable">
+      <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Sno</th>
+            <th scope="col">Description</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for i in order22 %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{i.description}}</td>
+            <td>
+              <button
+                class="btn1"
+                onclick="view2({{i.id}})"
+              >
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="50"
+                    height="20"
+                    fill="currentColor"
+                    class="bi bi-eye"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"
+                    />
+                    <path
+                      d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+    <!-- Modal -->
+    <div
+      class="modal modal-xl fade"
+      id="Mod"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">BikersHub</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <span id="message"></span>
+            <form class="row g-3">
+              <div class="col-md-6">
+                <label for="pname1" class="form-label">ProductName</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pname1"
+                  name="pname1"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="brand" class="form-label">Brand</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="brand1"
+                  name="brand1"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="price" class="form-label">Price</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="price1"
+                  name="price1"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="stock" class="form-label">Stock Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="stock1"
+                  name="stock1"
+                />
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    placeholder="Leave a comment here"
+                    id="text1"
+                    style="height: 100px"
+                  ></textarea>
+                  <label for="floatingTextarea2">Description</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="image" class="form-label">Image</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="image1"
+                  name="image1"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="video" class="form-label">Video</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="video1"
+                  name="video1"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="audio" class="form-label">Audio</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="audio1"
+                  name="audio1"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" onclick="create_order()">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Modal view-->
+    <div
+      class="modal modal-xl fade"
+      id="Modview"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">BikersHub</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <span id="message"></span>
+            <form class="row g-3">
+              <div class="col-md-6">
+                <label for="pname" class="form-label">ProductName</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pname2"
+                  name="pname2"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="brand" class="form-label">Brand</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="brand2"
+                  name="brand2"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="price" class="form-label">Price</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="price2"
+                  name="price2"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="stock" class="form-label">Stock Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="stock2"
+                  name="stock2"
+                />
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    placeholder="Leave a comment here"
+                    id="text2"
+                    style="height: 100px"
+                  ></textarea>
+                  <label for="floatingTextarea2">Description</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="image" class="form-label">Image</label>
+                <img src="" alt="" id="image2" width="500px"height="300px">
+              </div>
+              <div class="col-md-6">
+                <label for="video" class="form-label">Video</label>
+                <video src="" alt="" id="video2" width="500px"height="300px">
+              </div>
+              <div class="col-md-6">
+                <p>Audio</p>
+                 <audio width="200%" controls id="audio2" src="">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal complaint view-->
+
+    <div
+      class="modal modal-xl fade"
+      id="Modview22"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">BikersHub</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    placeholder="Leave a comment here"
+                    id="text223"
+                    style="height: 100px"
+                  ></textarea>
+                  <label for="floatingTextarea2">Description</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="image" class="form-label">Image</label>
+                <img src="" alt="" id="image223" width="500px"height="300px">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Modal edit-->
+    <div
+      class="modal modal-xl fade"
+      id="Modedit"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">BikersHub</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <span id="message"></span>
+            <form class="row g-3">
+              <div class="col-md-6">
+                <label for="pname" class="form-label">ProductName</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pname3"
+                  name="pname3"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="brand" class="form-label">Brand</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="brand3"
+                  name="brand3"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="price" class="form-label">Price</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="price3"
+                  name="price3"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="stock" class="form-label">Stock Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="stock3"
+                  name="stock3"
+                />
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    placeholder="Leave a comment here"
+                    id="text3"
+                    style="height: 100px"
+                  ></textarea>
+                  <label for="floatingTextarea2">Description</label>
+                </div>
+              </div>
+               <div class="col-md-6">
+                <label for="image" class="form-label">Image</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="image1"
+                  name="image1"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="video" class="form-label">Video</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="video1"
+                  name="video1"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="audio" class="form-label">Audio</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="audio1"
+                  name="audio1"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" onclick="edit_order()">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="moddelete" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you surely want to Delete ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="delid">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+  </body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  function create_order() {
+            var formData = new FormData();
+            formData.append("product_name", document.getElementById('pname1').value,);
+            formData.append("brand", document.getElementById('brand1').value,);
+            formData.append("price", document.getElementById('price1').value,);
+            formData.append("stock_status", document.getElementById('stock1').value,);
+            formData.append("description", document.getElementById('text1').value,);
+            const fileInput1 = document.getElementById('image1');
+            const file1 = fileInput1.files[0];
+            const fileInput2 = document.getElementById('video1');
+            const file2 = fileInput2.files[0];
+            const fileInput3 = document.getElementById('audio1');
+            const file3 = fileInput3.files[0];
+            formData.append('image', file1);
+            formData.append('video', file2);
+            formData.append('audio', file3);
+            $.ajax({
+                type: 'POST',
+                url: '/form_post',
+                data: formData,
+                encode: true,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+            }).done(function(data) {
+                if (data === "Done") {
+                  location.reload();    
+                }
+            });
+            
+        }
+function view1(data){
+    var id = data;
+    $.ajax( {
+        type : "put",
+        url : '/put_form/'+id,
+        id : id,
+        contentType : "application/json",
+        success: function(data1) {
+                $("#pname2").val(data1.product_name);
+                $("#brand2").val(data1.brand);
+                $("#price2").val(data1.price);
+                $("#stock2").val(data1.stock_status);
+                $("#text2").val(data1.description);
+                var videourl="/templates/videos/"+data1.video;
+                $("#video2").attr("src", videourl);
+                var imageurl="/templates/images/"+data1.image;
+                $("#image2").attr("src", imageurl);
+                var audiourl="/templates/audios/"+data1.audio;
+                $("#audio2").attr("src", audiourl);
+                $('#Modview').modal('show');             
+        },
+    });
+    return false;
+  }
+  function edit1(data){
+    var id = data;
+    $.ajax( {
+        type : "put",
+        url : '/put_form/'+id,
+        id : id,
+        contentType : "application/json",
+        success: function(data1) {
+                $("#pname3").val(data1.product_name);
+                $("#brand3").val(data1.brand);
+                $("#price3").val(data1.price);
+                $("#stock3").val(data1.stock_status);
+                $("#text3").val(data1.description);
+                var videourl="/templates/videos/"+data1.video;
+                $("#video3").attr("src", videourl);
+                var imageurl="/templates/images/"+data1.image;
+                $("#image3").attr("src", imageurl);
+                var audiourl="/templates/audios/"+data1.audio;
+                $("#audio3").attr("src", audiourl);
+                $('#Modedit').modal('show');             
+        },
+    });
+    return false;
+  }
+  function edit_order() {
+            var formData = new FormData();
+            formData.append("product_name", document.getElementById('pname3').value,);
+            formData.append("brand", document.getElementById('brand3').value,);
+            formData.append("price", document.getElementById('price3').value,);
+            formData.append("stock_status", document.getElementById('stock3').value,);
+            formData.append("description", document.getElementById('text3').value,);
+            const fileInput1 = document.getElementById('image3');
+            const file1 = fileInput1.files[0];
+            const fileInput2 = document.getElementById('video3');
+            const file2 = fileInput2.files[0];
+            const fileInput3 = document.getElementById('audio3');
+            const file3 = fileInput3.files[0];
+            formData.append('image', file1);
+            formData.append('video', file2);
+            formData.append('audio', file3);
+            $.ajax({
+                type: 'POST',
+                url: '/form_post',
+                data: formData,
+                encode: true,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+            }).done(function(data) {
+                if (data === "Done") {
+                  location.reload();    
+                }
+            });
+            
+        }
+        function get_delete(id){
+            $('#moddelete').modal('show');
+            $('#moddelete').find('.btn-danger').on('click', function(){
+          $.ajax({
+              type: "get",
+              url: '/del_data/'+id,
+              data: { id: id },
+              success: function() {
+                  location.reload();
+              },
+              error: function() {
+                  alert('Error deleting guest');
+              }
+          });
+      });
+  }
+  function view2(data){
+    alert("hi")
+    var id = data;
+    $.ajax( {
+        type : "put",
+        url : '/put_formcomp/'+id,
+        id : id,
+        contentType : "application/json",
+        success: function(data1) {
+                $("#text223").val(data1.description);
+                var imageurl="/templates/images/"+data1.image;
+                $("#image223").attr("src", imageurl);
+                $('#Modview22').modal('show');             
+        },
+    });
+    return false;
+  }
+</script> 

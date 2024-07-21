@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link href="templates/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="header container-fluid">
+      <!-- <button onclick="handleButtonClick()"> -->
+      <div class="option">
+        <button
+          class="btn btn-primary one"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasScrolling"
+          aria-controls="offcanvasScrolling"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-list"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+            />
+          </svg>
+          <a href="/cart"><button
+          class="btn btn-primary two"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasScrolling"
+          aria-controls="offcanvasScrolling"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-check" viewBox="0 0 16 16">
+  <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
+  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+</svg>
+        </button></a>
+        
+      </div>
+      <!-- </button> -->
+      <div class='profileClass'>
+        <a href="/get_profile"><div class="user-info">
+          <img src="/templates/assets/chain.jpg/" alt="User Image"></a>
+          <div class="user-name">{{current_user}}</div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+
+    <div
+      class="offcanvas offcanvas-start"
+      data-bs-scroll="true"
+      data-bs-backdrop="false"
+      tabindex="-1"
+      id="offcanvasScrolling"
+      aria-labelledby="offcanvasScrollingLabel"
+    >
+      <div class="offcanvas-header">
+        <h1 class="offcanvas-title" id="offcanvasScrollingLabel">Bikers Hub</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div id="main">
+          <!-- Cash Filters -->
+          <div class="cash checkbox-container">
+            <h2>Cash Filters</h2>
+            <label>
+              {% if "High-Low" in ffdata %}
+              <input onchange="applyfilter()" type="checkbox" name="cash" value="High-Low" checked/>
+              {%else%}
+              <input onchange="applyfilter()" type="checkbox" name="cash" value="High-Low" />
+              {%endif%}
+              High-Low 
+              </label
+            ><br />
+            <label>
+              {% if "Low-High" in ffdata %}
+              <input onchange="applyfilter()" type="checkbox" name="cash" value="Low-High" checked/>
+              {%else%}
+              <input onchange="applyfilter()" type="checkbox" name="cash" value="Low-High" />
+              {%endif%}
+              Low-High</label
+            ><br />
+          </div>
+          <br />
+          <!-- Spare Parts brandname -->
+          <div class="spare-parts checkbox-container">
+            <h2>Spares Brands</h2>
+            <label>
+              {% if "brembo" in ffdata %}
+              <input onchange="applyfilter()" type="checkbox" name="cash" value="brembo" checked/>
+              {%else%}
+               <input onchange="applyfilter()" type="checkbox" name="cash" value="brembo" />
+               {%endif%}
+              Brembo </label
+            ><br />
+            <label>
+              {% if "michelin" in ffdata %}
+              <input onchange="applyfilter()" type="checkbox" name="cash" value="michelin" ckecked/>
+              {%else%}
+              <input onchange="applyfilter()" type="checkbox" name="cash" value="michelin" />
+              {%endif%}
+              Michelin </label
+            ><br />
+            <label>
+              {% if "bosch" in ffdata %}
+              <input onchange="applyfilter()" type="checkbox" name="cash" value="bosch" checked/>
+              {%else%}
+              <input onchange="applyfilter()" type="checkbox" name="cash" value="bosch"/>
+              {%endif%}
+              Bosch </label
+            ><br />
+              {% if "motul" in ffdata %}
+              <input onchange="applyfilter()" type="checkbox" name="cash" value="motul" checked/>
+              {%else%}
+              <input onchange="applyfilter()" type="checkbox" name="cash" value="motul" />
+              {%endif%}
+              Motul 
+              </label
+            ><br />
+          </div>
+          <br />
+
+          <!-- Bike Brands -->
+          <div class="brands checkbox-container">
+            <h2>Bike Brands</h2>
+            <label>
+              {% if "honda" in ffdata %}
+              <input onchange="applyfilter()" type="checkbox" name="brand" value="honda" checked/>
+              {%else%}
+              <input onchange="applyfilter()" type="checkbox" name="brand" value="honda" />
+              {%endif%}
+              Honda </label
+            ><br />
+            <label>
+              {% if "bmw" in ffdata %}
+              <input onchange="applyfilter()" type="checkbox" name="brand" value="bmw" ckecked/>
+              {%else%}
+              <input onchange="applyfilter()" type="checkbox" name="brand" value="bmw" />
+              {%endif%}
+              BMW </label
+            ><br />
+            <label>
+              {% if "kawasaki" in ffdata %}
+              <input onchange="applyfilter()" type="checkbox" name="brand" value="kawasaki" ckecked/>
+              {%else%}
+              <input onchange="applyfilter()" type="checkbox" name="brand" value="kawasaki" />
+              {%endif%}
+              Kawasaki </label
+            ><br />
+            <label>
+              {% if "ktm" in ffdata %}
+              <input onchange="applyfilter()" type="checkbox" name="brand" value="ktm" checked/>
+              {%else%}
+              <input onchange="applyfilter()" type="checkbox" name="brand" value="ktm" />
+              {%endif%}
+              KTM </label
+            ><br />
+            <label>
+              {% if "yamaha" in ffdata %}
+              <input onchange="applyfilter()" type="checkbox" name="brand" value="yamaha" checked//>
+              {%else%}
+              <input onchange="applyfilter()" type="checkbox" name="brand" value="yamaha" />
+              {%endif%}
+              Yamaha </label
+            ><br />
+          </div>
+        </div>
+        <br /><br />
+      </div>
+    </div>
+    <div class="content">
+      <div class="con">
+      {% for product in products %}
+<div class="card" style="width: 18rem">
+ <img src="templates/images/{{product.image}}" height="300rem" width="250rem" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"><b>Product:</b> <b>{{ product.product_name }}</b></h5>
+    <b><p class="card-text">Brand: {{ product.brand }}</p>
+    <p class="card-text">Price: {{ product.price }}</p>
+    <p class="card-text">Availability: {{ product.stock_status }}</p></b>
+ {% set in_cart = false %}
+        {% for cart_item in cart_items %}
+            {% if cart_item.product_id == product.id and cart_item.user_name == current_user and cart_item.cart_Status=='yes'%}
+                {% set in_cart = true %}
+                <!-- Display the "Added to Cart" button -->
+                <form action="/add_cart/{{ product.id }}" method="post">
+                <button type="submit" class="btn btn-success added-to-cart-button">Added to Cart</button>
+                </form>
+            {% endif %}
+        {% endfor %}
+                <br>
+        {% if not in_cart %}
+            <!-- Display the "Add to Cart" button if the product is not in the cart -->
+            <form action="/add_cart/{{ product.id }}" method="post" class="add-to-cart-form">
+                <button type="submit" class="btn btn-warning">Add to Cart</button>
+            </form>
+        {% endif %}
+        <br>
+    <a href="/get_view/{{ product.id }}" class="btn btn-info">Buy Now</a>
+  </div>
+</div>
+{% endfor %}
+    </div>
+    <script>
+      function handleButtonClick() {
+        console.log("Button clicked!");
+      }
+    </script>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">
+              Welcome to Bikers Hub, your one-stop destination for all your
+              biking needs. We understand the exhilaration and joy that comes
+              with riding, whether you're exploring urban streets or tackling
+              challenging trails. Bikers Hub is dedicated to providing cyclists
+              of all levels with top-quality accessories to elevate their riding
+              experience.
+            </p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Categories</h6>
+            <ul class="footer-links">
+              <li>
+                <a href="http://scanfcode.com/category/c-language/"
+                  >Rider Jacket</a
+                >
+              </li>
+              <li>
+                <a href="http://scanfcode.com/category/front-end-development/"
+                  >Spare Parts</a
+                >
+              </li>
+              <li>
+                <a href="http://scanfcode.com/category/back-end-development/"
+                  >Tourist addons</a
+                >
+              </li>
+              <li>
+                <a
+                  href="http://scanfcode.com/category/java-programming-language/"
+                  >Modification Parts</a
+                >
+              </li>
+              <li>
+                <a href="http://scanfcode.com/category/android/"
+                  >Lighting Setup</a
+                >
+              </li>
+              <li>
+                <a href="http://scanfcode.com/category/templates/">Helmets</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="http://scanfcode.com/about/">About Us</a></li>
+              <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">
+              Copyright &copy; 2024 All Rights Reserved by
+              <a href="#" style="text-decoration: none">Biker Hub</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get all cards
+        var cards = document.querySelectorAll('.card');
+        
+        // Loop through each card
+        cards.forEach(function(card) {
+            // Check if card contains the "Added to Cart" button
+            var addedToCartButton = card.querySelector('.added-to-cart-button');
+            if (addedToCartButton) {
+                // If "Added to Cart" button exists, hide the "Add to Cart" button in the same card
+                var addToCartForm = card.querySelector('.add-to-cart-form');
+                if (addToCartForm) {
+                    addToCartForm.style.display = 'none';
+                }
+            }
+        });
+    });
+
+  function applyfilter(){
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            let checkedValues = [];
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    checkedValues.push(checkbox.value);
+                }
+            });
+            
+            console.log('Checked values:', checkedValues);
+            var url = "/filter?"+ "fdata=" + checkedValues;
+            window.location.assign(url);
+    }
+</script>
